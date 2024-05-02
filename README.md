@@ -27,7 +27,31 @@ package API is stable.
 
 ### Installation
 
-    go get github.com/gorilla/websocket
+```sh
+go get github.com/gorilla/websocket
+```
+
+then in `go.mod`, add 
+
+```
+replace github.com/gorilla/websocket v1.5.1 => github.com/adhocore/websocket v1.5.1
+```
+
+then run
+
+```sh
+go mod tidy
+```
+
+### Usage
+
+```go
+import "github.com/gorilla/websocket"
+
+buf := []byte
+// netConn is net.Conn instance
+conn := websocket.NewConn(netConn, true, 2048, 2048, nil, nil, buf)
+```
 
 ### Protocol Compliance
 
