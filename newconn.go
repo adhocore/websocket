@@ -9,7 +9,10 @@ func NewConn(conn net.Conn, isServer bool, readBufferSize, writeBufferSize int, 
 	return newConn(conn, isServer, readBufferSize, writeBufferSize, writeBufferPool, br, writeBuf)
 }
 
-func (c *Conn) SetupCompression() *Conn {
+func (c *Conn) SetupCompression(level ...int) *Conn {
+	if len(level) > 0 {
+		c.SetCompressionLevel(level[0])
+	}
 	c.enableWriteCompression = true
 	c.newCompressionWriter = compressNoContextTakeover
 	c.newDecompressionReader = decompressNoContextTakeover
